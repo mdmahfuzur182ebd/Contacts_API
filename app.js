@@ -1,15 +1,21 @@
 const express = require('express')
+const morgan = require('morgan')
+
+const contactRouter = require('./contactsRouter')
+
+
+
 const app = express();
+app.use(morgan('dev'))
+
+app.use(express.urlencoded({extended: true}))// formate data
+app.use(express.json())//json data
 
 
 
+app.use('/contacts', contactRouter)
 
 
-
-
-app.get('/', (req, res) => {
-    res.send("I am Root Route or URL")
-})
 
 app.get('*', (req, res) => {
     res.send('<h1>Error 404 Page Not Responded</h1>')
